@@ -39,5 +39,7 @@ def main():
             wall = "feh --bg-fill ./"+ current_module+"/"+timeLapsImage[2]
             print(wall)
             os.system(wall)
-    
-main()
+    systemTime.sleep(30*60)
+
+while True:    
+    main()
