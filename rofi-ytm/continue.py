@@ -64,11 +64,12 @@ if not autoplay:
 else:
     video = videos[0]
 
-run(['wget', video['thumbnail'], '-O', '/tmp/ytm_thumbnail'])
+run(['wget', video['thumbnail'], '-O', '/tmp/ytm_thumbnail.jpg'])
 run(
     f"nohup {config.TERMINAL} -e bash -c \"\
         echo '{video['title']}\n{video['url']}\n' && \
         echo '\n' && \
+        notify-send -i /tmp/ytm_thumbnail.jpg 'Playing {video['title'][0:10]}' 'playing now' && \
         mpv --no-video '{video['url']}' &&\
         ./continue.py {video['id']}\
     \" &", shell=True

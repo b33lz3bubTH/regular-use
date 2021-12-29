@@ -104,11 +104,12 @@ while True:
             selected = int(event['value'][0]) - 1
             video = videos[selected]
             print({'prompt': 'fetching', 'lines': []})
-            run(['wget', video['thumbnail'], '-O', '/tmp/ytm_thumbnail'])
+            run(['wget', video['thumbnail'], '-O', '/tmp/ytm_thumbnail.jpg'])
             run(
                 f"{config.TERMINAL} -e bash -c \"\
                     echo '{video['title']}\n{video['url']}\n' && \
                     echo '\n' && \
+                    notify-send -i /tmp/ytm_thumbnail.jpg 'Playing {video['title'][0:10]}' 'playing now' && \
                     mpv --no-video '{videos[selected]['url']}' && \
                     cd {dirname(__file__)} &&  \
                     ./continue.py {video['id']}\
